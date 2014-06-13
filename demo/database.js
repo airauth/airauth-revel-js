@@ -131,8 +131,6 @@ airspring.indexedDB.getFrameDB = function(index) {
   cursorRequest.onsuccess = function(e) {
     var result = e.target.result;
     if(!!result == false) {
-      console.log('Inside!'); 
-      console.log(data);
       generateChart(data, "#container");
       return;
     }

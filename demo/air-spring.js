@@ -81,7 +81,6 @@ function count_extended_fingers(hand) {
 
 
 function generateChart(data, div_id){
-	console.log(data);
 	var highcharts_data = {
                     chart: {
                         zoomType: 'x'
@@ -96,7 +95,11 @@ function generateChart(data, div_id){
                     },
                     xAxis: {
                         type: 'datetime',
-                        minRange: 100 
+                        minRange: 100,
+			labels:
+			{
+			  enabled: false
+			}
                     },
                     yAxis: {
                         title: {
@@ -127,10 +130,13 @@ function generateChart(data, div_id){
                             threshold: null
                         }
                     },
+		    tooltip: {
+			enabled: false 
+		    },
             
                     series: [{
                         type: 'area',
-                        name: '',
+                        name: 'Index Proximal',
                         pointInterval: 24 * 3600 * 1000,
                         pointStart: Date.UTC(2006, 0, 01),
                         data: data
