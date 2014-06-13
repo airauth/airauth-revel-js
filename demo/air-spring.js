@@ -20,10 +20,10 @@ function auth_ready(frame, count) {
 			else if (hand.palmPosition[0] < -50) {
 				ret = ["Hand Too Far Left", 0];
 			}
-			else if (hand.palmPosition[1] > 115) {
+			else if (hand.palmPosition[1] > 150) {
 				ret = ["Hand Too High", 0];
 			}
-			else if (hand.palmPosition[1] < 110) {
+			else if (hand.palmPosition[1] < 100) {
 				ret = ["Hand Too Low", 0];
 			}
 			else if (hand.palmPosition[2] < -50) {
@@ -57,6 +57,7 @@ function auth_ready(frame, count) {
 			++count;
 			ret = ["Gathering", count];
 			//add hand data here
+			addHandData(frame);
 		}else{
 			ret = ["Gathered All Data!", count];
 		}
@@ -86,7 +87,7 @@ function generateChart(data, div_id){
                         zoomType: 'x'
                     },
                     title: {
-                        text: 'Air.Auth Hand Data Visualization'
+                        text: 'Air.Auth Hand Data'
                     },
                     subtitle: {
                         text: document.ontouchstart === undefined ?
@@ -95,11 +96,11 @@ function generateChart(data, div_id){
                     },
                     xAxis: {
                         type: 'datetime',
-                        minRange: 14 * 24 * 3600000 // fourteen days
+                        minRange: 100 
                     },
                     yAxis: {
                         title: {
-                            text: 'Exchange rate'
+                            text: 'Length (mm)'
                         }
                     },
                     legend: {
@@ -129,7 +130,7 @@ function generateChart(data, div_id){
             
                     series: [{
                         type: 'area',
-                        name: 'USD to EUR',
+                        name: '',
                         pointInterval: 24 * 3600 * 1000,
                         pointStart: Date.UTC(2006, 0, 01),
                         data: data

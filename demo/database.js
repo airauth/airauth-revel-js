@@ -33,7 +33,7 @@ airspring.indexedDB.addHandData = function(frame) {
   var trans = db.transaction(["airspring_handdata"], "readwrite");
   var store = trans.objectStore("airspring_handdata");
 
-  //console.log("Adding Data");
+  console.log("Adding Data");
 
   var request = store.put({
     "valid" : frame.hands[0].valid,
@@ -87,13 +87,6 @@ airspring.indexedDB.addHandData = function(frame) {
   request.onsuccess = function(e) {
     // Re-render all the todo's
     //airspring.indexedDB.getHandData();
-    /*console.log(frame.hands[0].id);
-    console.log("metacarpal: " + frame.hands[0].indexFinger.metacarpal.length);
-    console.log("proximal: " + frame.hands[0].indexFinger.proximal.length);
-    console.log("medial: " + frame.hands[0].indexFinger.medial.length);
-    console.log("distal: " + frame.hands[0].indexFinger.distal.length);
-    console.log("Total indexFinger: " + frame.hands[0].indexFinger.length);
-    console.log(frame.hands[0]);*/
   };
 
   request.onerror = function(e) {
@@ -137,13 +130,14 @@ airspring.indexedDB.getFrameDB = function(index) {
 
   cursorRequest.onsuccess = function(e) {
     var result = e.target.result;
-    if(!!result == false) { 
+    if(!!result == false) {
+      console.log('Inside!'); 
+      console.log(data);
       generateChart(data, "#container");
       return;
     }
 
     data[i++] = result.value.indexProximalLenght;
-    //console.log(data);
 
     result.continue();
 
